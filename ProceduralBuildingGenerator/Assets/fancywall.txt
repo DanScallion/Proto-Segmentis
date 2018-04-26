@@ -1,0 +1,98 @@
+                        new Vector3((-SegmentSize.x * 0.5f), (-SegmentSize.y * 0.5f), (-SegmentSize.z * 0.5f)), //0 front
+                        new Vector3((-WindowSize.x * 0.25f), (-WindowSize.y * 0.25f), (-SegmentSize.z * 0.5f)), //1 window
+                        new Vector3((-SegmentSize.x * 0.5f), (SegmentSize.y * 0.5f), (-SegmentSize.z * 0.5f)), //2
+                        new Vector3((-WindowSize.x * 0.25f), (WindowSize.y * 0.25f), (-SegmentSize.z * 0.5f)), //3 window
+                        new Vector3((SegmentSize.x * 0.5f), (SegmentSize.y * 0.5f), (-SegmentSize.z * 0.5f)), //4
+                        new Vector3((WindowSize.x * 0.25f), (WindowSize.y * 0.25f), (-SegmentSize.z * 0.5f)), //5 window
+                        new Vector3((SegmentSize.x * 0.5f), (-SegmentSize.y * 0.5f), (-SegmentSize.z * 0.5f)), //6
+                        new Vector3((WindowSize.x * 0.25f), (-WindowSize.y * 0.25f), (-SegmentSize.z * 0.5f)), //7 window
+                        new Vector3((SegmentSize.x * 0.25f), (-SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //8 windowsill
+                        new Vector3((SegmentSize.x * 0.25f), (SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //9
+                        new Vector3((-SegmentSize.x * 0.25f), (SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //10
+                        new Vector3((-SegmentSize.x * 0.25f), (-SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //11
+                        new Vector3((-SegmentSize.x * 0.5f), (-SegmentSize.y * 0.5f), (SegmentSize.z * 0.5f)), //12 back
+                        new Vector3((-SegmentSize.x * 0.25f), (-SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //13 window
+                        new Vector3((-SegmentSize.x * 0.5f), (SegmentSize.y * 0.5f), (SegmentSize.z * 0.5f)), //14
+                        new Vector3((-SegmentSize.x * 0.25f), (SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //15 window
+                        new Vector3((SegmentSize.x * 0.5f), (SegmentSize.y * 0.5f), (SegmentSize.z * 0.5f)), //16
+                        new Vector3((SegmentSize.x * 0.25f), (SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //17 window
+                        new Vector3((SegmentSize.x * 0.5f), (-SegmentSize.y * 0.5f), (SegmentSize.z * 0.5f)), //18
+                        new Vector3((SegmentSize.x * 0.25f), (-SegmentSize.y * 0.25f), (SegmentSize.z * 0.5f)), //19 window
+
+
+						//front
+                        4, 6, 5,
+                        4, 5, 3,
+                        3, 2, 4,
+                        3, 1, 2,
+                        1, 0, 2,
+                        1, 7, 0,
+                        7, 6, 0,
+                        7, 5, 6,
+                        
+                        //windowsill bottom
+                        9, 8, 11,
+                        11, 10, 9, 
+                        
+                        //windowsill left
+                        14, 13, 12,
+                        12, 15, 14,
+
+                        //windowsill top
+                        18, 17, 16,
+                        16, 19, 18,
+
+                        //windowsill right
+                        21, 20, 23,
+                        23, 22, 21,
+                        
+                        //back
+                        26, 24, 27,
+                        26, 27, 29,
+                        29, 28, 26,
+                        29, 31, 28,
+                        31, 30, 28,
+                        31, 25, 30,
+                        25, 24, 30,
+                        25, 27, 24
+
+
+
+						 //front
+	                    new Vector2(0, 0),
+                        new Vector2(0.25f, 0.25f), //window
+                        new Vector2(0, 1),
+                        new Vector2(0.25f, 0.75f), //window
+                        new Vector2(1, 1),
+                        new Vector2(0.75f, 0.75f), //window
+                        new Vector2(1, 0),
+                        new Vector2(0.75f, 0.25f), //window
+                        //windowsill bottom
+                        new Vector2(0.75f, 0.25f),
+                        new Vector2(0.75f, 0.35f),
+                        new Vector2(0.25f, 0.35f),
+                        new Vector2(0.25f, 0.25f),
+                        //windowsill left
+                        new Vector2(0.35f, 0.25f),
+                        new Vector2(0.25f, 0.25f), 
+                        new Vector2(0.25f, 0.75f),
+                        new Vector2(0.35f, 0.75f),
+                        //windowsill top
+                        new Vector2(0.25f, 0.75f),
+                        new Vector2(0.25f, 0.85f),
+                        new Vector2(0.75f, 0.85f),
+                        new Vector2(0.75f, 0.75f),
+                        //windowsill right
+                        new Vector2(0.75f, 0.75f),
+                        new Vector2(0.85f, 0.75f),
+                        new Vector2(0.85f, 0.25f),
+                        new Vector2(0.75f, 0.25f),
+                        //back
+                        new Vector2(0, 0),
+                        new Vector2(0.25f, 0.25f),
+                        new Vector2(0, 1),
+                        new Vector2(0.25f, 0.75f),
+                        new Vector2(1, 1),
+                        new Vector2(0.75f, 0.75f),
+                        new Vector2(1, 0f),
+                        new Vector2(0.75f, 0.25f),

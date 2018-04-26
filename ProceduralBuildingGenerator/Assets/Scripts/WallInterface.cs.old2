@@ -1,0 +1,275 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+using UnityEditor;
+using System.IO;
+
+[ExecuteInEditMode]
+public class WallInterface : MonoBehaviour {
+    public float spawnCD = 0.5f;
+    public GameObject createdWall;
+    [SerializeField]
+    public Segmentis.Wall wallObj;
+    public bool autoRebuild = true;
+
+    private Vector3 _onChangeWallSize = Vector3.zero;
+    private Vector3 _onChangeWallPosition = Vector3.zero;
+    private Vector3 _onChangeWallRotation = Vector3.zero;
+    private Vector2 _onChangeWindowSize = Vector3.zero;
+    private Vector2 _onChangeDoorSize = Vector3.zero;
+    private bool _onChangeBySegment = false;
+    private bool _onChangeMergePlainSegments = false;
+    
+    void Start () {
+        InitializeOnChange();
+
+    }
+
+    void Update () {
+        MonitorChange();
+    }
+
+    public IEnumerator EveryXseconds()
+    {
+        foreach (Transform segment in createdWall.transform)
+        {
+            segment.gameObject.SetActive(true);
+            yield return new WaitForSeconds(spawnCD);
+        }
+    }
+
+    private void InitializeOnChange()
+    {
+        _onChangeWallSize = wallObj.WallSize;
+        _onChangeWallPosition = wallObj.WallPosition;
+        _onChangeWallRotation = wallObj.WallRotation;
+        _onChangeWindowSize = wallObj.WindowSize;
+        _onChangeDoorSize = wallObj.DoorSize;
+        _onChangeBySegment = wallObj.BySegment;
+        _onChangeMergePlainSegments = wallObj.MergeSegments;
+    }
+
+    private void MonitorChange()
+    {
+        if(createdWall != null)
+        {
+            if (wallObj.WallSize != _onChangeWallSize && autoRebuild)
+            {
+                _onChangeWallSize = wallObj.WallSize;
+                Rebuild();
+            }
+
+            if (wallObj.WallPosition != _onChangeWallPosition && autoRebuild)
+            {
+                _onChangeWallPosition = wallObj.WallPosition;
+                Rebuild();
+            }
+
+            if (wallObj.WallRotation != _onChangeWallRotation && autoRebuild)
+            {
+                _onChangeWallRotation = wallObj.WallRotation;
+                Rebuild();
+            }
+
+            if (wallObj.WindowSize != _onChangeWindowSize && autoRebuild)
+            {
+                _onChangeWindowSize = wallObj.WindowSize;
+                Rebuild();
+            }
+
+            if (wallObj.DoorSize != _onChangeDoorSize && autoRebuild)
+            {
+                _onChangeDoorSize = wallObj.DoorSize;
+                Rebuild();
+            }
+
+            if(wallObj.BySegment != _onChangeBySegment && autoRebuild)
+                {
+                _onChangeBySegment = wallObj.BySegment;
+                Rebuild();
+            }
+
+            if (wallObj.MergeSegments != _onChangeMergePlainSegments && autoRebuild)
+            {
+                _onChangeMergePlainSegments = wallObj.MergeSegments;
+                Rebuild();
+            }
+        }
+    }
+
+    public void CheckBools(Segmentis.Wall wall)
+    {
+        if (wallObj.BySegment)
+            wall.BySegment = true;
+        else
+            wall.BySegment = false;
+
+        if (wallObj.MergeSegments)
+            wall.MergeSegments = true;
+        else
+            wall.MergeSegments = false;
+
+        if (wallObj.Debug)
+            wall.Debug = true;
+        else
+            wall.Debug = false;
+
+        if (wallObj.ForcePosition)
+            wall.ForcePosition = true;
+        else
+            wall.ForcePosition = false;
+
+        if (wallObj.ForceName)
+            wall.ForceName = true;
+        else
+            wall.ForceName = false;
+    }
+
+    public void Rebuild()
+    {
+        if (wallObj == null)
+            LoadData();
+
+        if (wallObj.WallGameObjects == null)
+            wallObj.WallGameObjects = createdWall;
+
+        //wallObj.WallGameObjects = createdWall;
+
+        if (createdWall != null)
+        {
+            //wallObj.SegmentType = wallObj.SegmentType;
+
+            CheckBools(wallObj);
+
+            wallObj.ReBuild();
+        }
+    }
+
+    public void SegmentsToLeft()
+    {
+        List<WallSegmentType> tempSegments = new List<WallSegmentType>();
+
+        for (int i = 1; i < wallObj.SegmentType.Count; i++)
+        {
+            tempSegments.Add(wallObj.SegmentType[i]);
+        }
+        tempSegments.Add(wallObj.SegmentType.First());
+        wallObj.SegmentType = tempSegments;
+
+        if (autoRebuild)
+            Rebuild();
+    }
+
+    public void SegmentsToRight()
+    {
+        List<WallSegmentType> tempSegments = new List<WallSegmentType>();
+
+        tempSegments.Add(wallObj.SegmentType.Last());
+        for(int i = 0; i < wallObj.SegmentType.Count-1; i++)
+        {
+            tempSegments.Add(wallObj.SegmentType[i]);
+        }
+        wallObj.SegmentType = tempSegments;
+
+        if(autoRebuild)
+            Rebuild();
+    }
+
+    public void Build()
+    {
+        if(wallObj == null)
+        {
+            wallObj = new Segmentis.Wall(wallObj.WallSize, wallObj.WallRotation, wallObj.WallPosition, "Wall 1", wallObj.WindowSize, wallObj.DoorSize, wallObj.SegmentType.ToList());
+
+            CheckBools(wallObj);
+
+            createdWall = wallObj.Build();
+
+            if (spawnCD > 0 && wallObj.BySegment && createdWall != null && Application.isPlaying)
+            {
+                foreach (Transform segment in createdWall.transform)
+                {
+                    segment.gameObject.SetActive(false);
+                }
+
+                StartCoroutine("everyXseconds");
+            }
+        }
+        else
+        {
+            Segmentis.Wall newWall2 = new Segmentis.Wall(wallObj.WallSize, wallObj.WallRotation, wallObj.WallPosition, "Wall 1", wallObj.WindowSize, wallObj.DoorSize, wallObj.SegmentType.ToList());
+
+            newWall2.SegmentType = wallObj.SegmentType;
+
+            CheckBools(newWall2);
+
+            newWall2.WallSize = wallObj.WallSize;
+            newWall2.WallPosition = wallObj.WallPosition;
+            newWall2.WallRotation = wallObj.WallRotation;
+            newWall2.WindowSize = wallObj.WindowSize;
+            newWall2.DoorSize = wallObj.DoorSize;
+
+            newWall2.Build();            
+        }
+    }
+
+    public void SaveAsPrefab()
+    {
+        if (createdWall != null)
+        {
+            Directory.CreateDirectory("Assets/Runtime/" + wallObj.UniqueID +  "/Mesh/");
+            Directory.CreateDirectory("Assets/Runtime/" + wallObj.UniqueID +  "/Prefabs/");
+            Serializer.Save<Segmentis.Wall>("Assets/Runtime/" + wallObj.UniqueID + "/save.json", wallObj, true);
+
+            if (!wallObj.BySegment)
+            {
+                DestroyImmediate(createdWall.GetComponent<MeshCollider>(), true);
+
+
+                if (Application.isPlaying)
+                    AssetDatabase.CreateAsset(createdWall.gameObject.GetComponent<MeshFilter>().mesh, "Assets/Runtime/" + wallObj.UniqueID +  "/Mesh/" + createdWall.name + ".asset");
+                else
+                    AssetDatabase.CreateAsset(createdWall.gameObject.GetComponent<MeshFilter>().sharedMesh, "Assets/Runtime/" + wallObj.UniqueID + "/Mesh/" + createdWall.name + ".asset");
+
+                AssetDatabase.SaveAssets();
+                GameObject prefab = PrefabUtility.CreatePrefab("Assets/Runtime/" + wallObj.UniqueID + "/Prefabs/" + createdWall.name + ".prefab", createdWall);
+                //DestroyImmediate(prefab.GetComponent<MeshCollider>(), true);
+                prefab.AddComponent<MeshCollider>();
+            }
+            else
+            {
+                foreach (Transform segment in createdWall.transform)
+                {
+                    DestroyImmediate(segment.GetComponent<MeshCollider>(), true);
+
+                    if (Application.isPlaying)
+                        AssetDatabase.CreateAsset(segment.gameObject.GetComponent<MeshFilter>().mesh, "Assets/Runtime/" + wallObj.UniqueID + "/Mesh/" + segment.name + ".asset");
+                    else
+                        AssetDatabase.CreateAsset(segment.gameObject.GetComponent<MeshFilter>().sharedMesh, "Assets/Runtime/" + wallObj.UniqueID + "/Mesh/" + segment.name + ".asset");
+
+                    AssetDatabase.SaveAssets();
+                    /*GameObject prefab =*/ PrefabUtility.CreatePrefab("Assets/Runtime/" + wallObj.UniqueID + "/Prefabs/" + createdWall.name + ".prefab", createdWall);
+                    //DestroyImmediate(segment.gameObject.GetComponent<MeshCollider>(), true);
+                    segment.gameObject.AddComponent<MeshCollider>();
+                }
+            }
+                    
+        }
+    }
+
+    public void SaveAsData()
+    {
+        Directory.CreateDirectory("Assets/Runtime/" + wallObj.UniqueID);
+        Serializer.Save<Segmentis.Wall>("Assets/Runtime/" + wallObj.UniqueID +  "/save.json", wallObj, true);
+    }
+
+    public void LoadData()
+    {
+        print(wallObj);
+        string dir = ("Assets/Runtime/" + wallObj.UniqueID + "/save.json");
+        wallObj = Serializer.Load<Segmentis.Wall>(dir, true);
+        wallObj.WallGameObjects = createdWall;
+        print(wallObj.UniqueID);
+    }
+}

@@ -1,0 +1,71 @@
+        List<WallSegmentType> mergedPlainSegments = new List<WallSegmentType>(); 
+
+        foreach (WallSegmentType element in wallSegments)
+        {
+            if (mergedPlainSegments.Count == 0 || element != WallSegmentType.Plain || mergedPlainSegments.Last() != element)
+                mergedPlainSegments.Add(element);
+            
+        }
+
+                if (wallSegments[i + 1] == WallSegmentType.Plain)
+                {
+                    merged[i + 1] = merged[i] + segmentSize[i + 1];
+                    merged[i] = 0;
+                }
+
+
+
+
+        /*Vector3[] vertices = new Vector3[]
+        {
+
+        };*/
+//vertices = vertices.Concat(wallSegment.CalculateVertices()).ToArray();
+
+
+//auto rebuild
+//build in editor
+
+
+
+
+
+//MeshFilter wallMeshFilter = obj.WallGameObjects.First().gameObject.GetComponent<MeshFilter>();
+        //Mesh mesh = wallMeshFilter.mesh;
+
+        /*GameObject objToEdit = obj.WallGameObjects.First();
+        objToEdit.GetComponent<MeshFilter>().mesh.vertices = obj.CalculatedVertices.ToArray();
+        objToEdit.GetComponent<MeshFilter>().mesh.triangles = obj.CalculatedTris.ToArray();
+        objToEdit.GetComponent<MeshFilter>().mesh.uv = GenerateUV(obj.CalculatedVertices.ToArray(), obj.CalculatedTris.ToArray());
+        objToEdit.GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        objToEdit.transform.Rotate(obj.WallRotation.x, obj.WallRotation.y, obj.WallRotation.z);
+        UnityEngine.Object.Destroy(objToEdit.GetComponent<MeshCollider>());
+        objToEdit.AddComponent<MeshCollider>();
+
+        if(obj.ForceName)
+            objToEdit.name = obj.WallName;
+
+        if (obj.ForcePosition)
+            objToEdit.transform.position = obj.WallPosition;*/
+
+
+
+
+
+
+Directory.CreateDirectory("Assets/Runtime/" + obj.GetInstanceID().ToString() + "/Mesh/");
+                    Directory.CreateDirectory("Assets/Runtime/" + obj.GetInstanceID().ToString() + "/Prefabs/");
+                    if (!bySegment)
+                    {
+                        AssetDatabase.CreateAsset(obj.gameObject.GetComponent<MeshFilter>().mesh, "Assets/Runtime/" + obj.GetInstanceID().ToString() + "/Mesh/" + obj.name + ".asset");
+                        AssetDatabase.SaveAssets();
+                    }
+                    else
+                    {
+                        foreach (Transform segment in createdWall.First().transform)
+                        {
+                            AssetDatabase.CreateAsset(segment.gameObject.GetComponent<MeshFilter>().mesh, "Assets/Runtime/" + obj.GetInstanceID().ToString() + "/Mesh/" + segment.name + ".asset");
+                            AssetDatabase.SaveAssets();
+                        }
+                    }
+                    GameObject prefab = PrefabUtility.CreatePrefab("Assets/Runtime/" + obj.GetInstanceID().ToString() + "/Prefabs/" + obj.name + ".prefab", obj);
