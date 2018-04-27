@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+#if UNITY_EDITOR 
 using UnityEditor;
+#endif
 using System.IO;
 
 [ExecuteInEditMode]
@@ -236,7 +238,7 @@ public class WallInterface : MonoBehaviour {
             newWall2.Build();            
         }
     }
-
+#if UNITY_EDITOR
     public void SaveAsPrefab()
     {
         if (createdWall != null)
@@ -280,7 +282,7 @@ public class WallInterface : MonoBehaviour {
                     
         }
     }
-
+#endif
     public void SaveAsData()
     {
         Directory.CreateDirectory("Assets/Runtime/" + wallObj.UniqueID);
