@@ -293,6 +293,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BuildingsGeneratorPrototype.cs" />
     <Compile Include="Assets\Scripts\Serializer.cs" />
+    <Compile Include="Assets\Scripts\TestRuntimeBuild.cs" />
     <Compile Include="Assets\Scripts\Version 2\Building.cs" />
     <Compile Include="Assets\Scripts\Version 2\BuildingInterface.cs" />
     <Compile Include="Assets\Scripts\Version 2\BuildMesh.cs" />
