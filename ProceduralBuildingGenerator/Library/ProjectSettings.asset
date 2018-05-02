@@ -650,7 +650,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 3d7289aa-75a9-45c5-9c53-baa28e55f740
-  projectName: Segmentis - Procedural Building Generation
+  projectName: ProceduralBuildingGeneration
   organizationId: tetete
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
