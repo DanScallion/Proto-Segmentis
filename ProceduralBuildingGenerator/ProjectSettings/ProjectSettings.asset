@@ -644,11 +644,13 @@ PlayerSettings:
   cloudServicesEnabled:
     Build: 1
     Collab: 1
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 5f65d05f-6eba-4b97-88df-61243531b12c
-  projectName: Prototype
+  cloudProjectId: 3d7289aa-75a9-45c5-9c53-baa28e55f740
+  projectName: Segmentis - Procedural Building Generation
   organizationId: tetete
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
