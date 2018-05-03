@@ -299,6 +299,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\WallEditModeTest.cs" />
     <Compile Include="Assets\Scripts\Version 2\Editor\BuildingEditor.cs" />
     <Compile Include="Assets\Scripts\Version 2\Editor\MainEditor.cs" />
     <Compile Include="Assets\Scripts\Version 2\Editor\WallEditor.cs" />

@@ -292,8 +292,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BuildingsGeneratorPrototype.cs" />
+    <Compile Include="Assets\Scripts\RuntimeBuild.cs" />
     <Compile Include="Assets\Scripts\Serializer.cs" />
-    <Compile Include="Assets\Scripts\TestRuntimeBuild.cs" />
     <Compile Include="Assets\Scripts\Version 2\Building.cs" />
     <Compile Include="Assets\Scripts\Version 2\BuildingInterface.cs" />
     <Compile Include="Assets\Scripts\Version 2\BuildMesh.cs" />
@@ -303,6 +303,7 @@
     <Compile Include="Assets\Scripts\Version 2\WallInterface.cs" />
     <Compile Include="Assets\Scripts\Version 2\WallSegment.cs" />
     <Compile Include="Assets\Scripts\Version 2\WallSegmentType.cs" />
+    <Compile Include="Assets\Scripts\WallPlayModeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Old Files\code.txt" />

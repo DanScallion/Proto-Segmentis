@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class TestRuntimeBuild : MonoBehaviour {
+public class RuntimeBuild : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,7 @@ public class TestRuntimeBuild : MonoBehaviour {
         }.ToList();
 
 
-        new Segmentis.Wall(new Vector3(12, 2.4f, 0.1f), Vector3.zero, Vector3.zero, segmentType).Build();
+        new Segmentis.Wall(new Vector3(12, 2.4f, 0.1f), Vector3.zero, Vector3.zero, "Test Wall", segmentType).Build();
 	}
 	
 	// Update is called once per frame
