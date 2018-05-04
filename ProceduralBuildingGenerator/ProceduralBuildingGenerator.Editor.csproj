@@ -283,6 +283,12 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/danie/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Cloud.BugReporting.Plugin">
+      <HintPath>Assets/BugReporting/Unity.Cloud.BugReporting.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cloud.BugReporting.Client">
+      <HintPath>Assets/BugReporting/Unity.Cloud.BugReporting.Client.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ProceduralBuildingGenerator.Plugins.csproj">
@@ -299,12 +305,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\WallEditModeTest.cs" />
+    <Compile Include="Assets\Editor\BugReporting\DevLogWindow.cs" />
     <Compile Include="Assets\Scripts\Version 2\Editor\BuildingEditor.cs" />
     <Compile Include="Assets\Scripts\Version 2\Editor\MainEditor.cs" />
+    <Compile Include="Assets\Scripts\Version 2\Editor\WallEditModeTest.cs" />
     <Compile Include="Assets\Scripts\Version 2\Editor\WallEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\BugReporting\link.xml" />
     <None Include="Assets\Old Files\code.txt" />
     <None Include="Assets\Old Files\fancywall.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
